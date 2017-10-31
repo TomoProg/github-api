@@ -3,7 +3,6 @@ package main
 import (
 	"context"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"log"
 
@@ -66,20 +65,12 @@ func main() {
 	tokens := Tokens{}
 
 	// Githubアクセストークン読み込み
-	github_token, err := ioutil.ReadFile("config/access_token")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	tokens.Github = string(github_token)
+	github_token := os.Getenv("GITHUB_TOKEN")
+	tokens.Github = github_token
 
-	// Githubアクセストークン読み込み
-	slack_token, err := ioutil.ReadFile("config/slack_api_token")
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-	tokens.Slack = string(slack_token)
+	// Slackアクセストークン読み込み
+	slack_token := os.Getenv("SLACK_TOKEN")
+	tokens.Slack = slack_token
 
 	// 起動
 	run(&tokens)
