@@ -6,5 +6,8 @@ services:
     container_name: go_app
     volumes:
       - ./app/:/go/app/
+    environment:
+      GITHUB_TOKEN: Write Your GitHub Token!
+      SLACK_TOKEN: Write Your Slack Token!
     tty: true
 
